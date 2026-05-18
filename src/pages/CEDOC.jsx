@@ -153,7 +153,7 @@ export default function CEDOC() {
                     <div className="article-meta">
                       {a.tags.map((t) => <span className="meta-tag" key={t}>{t}</span>)}
                     </div>
-                    <a href="#" className="download-btn">⬇ Descargar PDF</a>
+                    <button type="button" className="download-btn">⬇ Descargar PDF</button>
                   </div>
                 </div>
               ))}
@@ -170,7 +170,7 @@ export default function CEDOC() {
                     <div className="article-meta">
                       {a.tags.map((t) => <span className="meta-tag" key={t}>{t}</span>)}
                     </div>
-                    <a href="#" className="download-btn" style={{ background: 'var(--dorado)', color: 'var(--oscuro)' }}>👁 Ver avance</a>
+                    <button type="button" className="download-btn" style={{ background: 'var(--dorado)', color: 'var(--oscuro)' }}>👁 Ver avance</button>
                   </div>
                 </div>
               ))}
@@ -195,14 +195,14 @@ export default function CEDOC() {
               <h3>📄 Descargas Rápidas</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '.7rem' }}>
                 {DOWNLOADS.map(({ emoji, label, size, gold }) => (
-                  <a key={label} href="#" className="download-btn"
+                  <button key={label} type="button" className="download-btn"
                     style={{
                       justifyContent: 'space-between',
                       ...(gold ? { background: 'var(--dorado)', color: 'var(--oscuro)' } : {}),
                     }}>
                     <span>{emoji} {label}</span>
                     <span style={{ fontSize: '.7rem', opacity: .7 }}>{size}</span>
-                  </a>
+                  </button>
                 ))}
               </div>
             </div>

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Ticker from '../components/Ticker';
 import { useReveal } from '../hooks/useReveal';

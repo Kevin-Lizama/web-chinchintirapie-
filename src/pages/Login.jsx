@@ -104,7 +104,7 @@ export default function Login() {
 
           {tab === 'login' && (
             <div style={{ textAlign: 'right', marginBottom: '1rem' }}>
-              <a href="#" style={{ color: 'var(--rojo)', fontSize: '.82rem', fontWeight: 700 }}>¿Olvidaste tu contraseña?</a>
+              <button type="button" onClick={() => {}} style={{ background: 'none', border: 'none', color: 'var(--rojo)', fontSize: '.82rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'Nunito, sans-serif', padding: 0 }}>¿Olvidaste tu contraseña?</button>
             </div>
           )}
 

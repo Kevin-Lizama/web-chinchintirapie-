@@ -166,7 +166,7 @@ export function MaterialEducativo() {
                 <span className="media-tag">{type}</span>
                 <h3 style={{ fontFamily: 'Boogaloo, cursive', fontSize: '1.1rem', color: 'var(--oscuro)', margin: '.4rem 0' }}>{title}</h3>
                 <p style={{ fontSize: '.8rem', color: '#7a5c40', marginBottom: '.8rem' }}>Nivel: {level} · {pages}</p>
-                <a href="#" className="download-btn" style={{ width: '100%', justifyContent: 'center' }}>⬇ Descargar gratis</a>
+                <button type="button" className="download-btn" style={{ width: '100%', justifyContent: 'center' }}>⬇ Descargar gratis</button>
               </div>
             </article>
           ))}

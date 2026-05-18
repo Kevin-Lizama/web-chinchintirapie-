@@ -419,7 +419,11 @@ body::before {
   letter-spacing: .5px;
   transition: background .2s;
   margin-top: .5rem;
+  border: none;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
 }
+
 .download-btn:hover { background: var(--rojo); color: #fff; }
 .cedoc-sidebar {}
 .sidebar-widget {

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useReveal } from '../hooks/useReveal';
 import Ticker from '../components/Ticker';
 
