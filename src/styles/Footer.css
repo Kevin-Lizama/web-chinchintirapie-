@@ -91,23 +91,3 @@ footer {
 @media (max-width: 640px) {
   .footer-grid { grid-template-columns: 1fr; }
 }
-
-.scroll-top-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(0, 251, 207, 0.3);
-  color: var(--cian);
-  padding: .5rem .8rem;
-  border-radius: 8px;
-  font-family: 'Nunito', sans-serif;
-  font-weight: 800;
-  font-size: .8rem;
-  cursor: pointer;
-  transition: all .25s ease;
-}
-
-.scroll-top-btn:hover {
-  background: var(--cian);
-  color: var(--morado-o);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 251, 207, 0.25);
-}

@@ -2,7 +2,6 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
 import { Cronicas, Repositorio, MaterialEducativo } from './pages/OtherPages';
 import './styles/global.css';
 
@@ -37,7 +36,7 @@ function PageLoader() {
 // Layout wrapper – Login page has no Navbar/Footer
 function Layout() {
   const { pathname } = useLocation();
-  const isLogin = pathname === '/login' || pathname === '/ingresar';
+  const isLogin = pathname === '/login';
 
   return (
     <>
@@ -55,7 +54,6 @@ function Layout() {
           <Route path="/contacto"            element={<Contacto />} />
           <Route path="/tienda"              element={<Tienda />} />
           <Route path="/login"               element={<Login />} />
-          <Route path="/ingresar"            element={<Login />} />
           {/* 404 fallback */}
           <Route path="*" element={
             <div style={{ textAlign: 'center', padding: '6rem 2rem' }}>
@@ -75,7 +73,6 @@ function Layout() {
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
       <Layout />
     </BrowserRouter>
   );
