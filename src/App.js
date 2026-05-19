@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { Cronicas, Repositorio, MaterialEducativo } from './pages/OtherPages';
+import { AuthProvider } from './context/AuthContext';
 import './styles/global.css';
 
 // Lazy-loaded pages for better performance
@@ -73,7 +74,9 @@ function Layout() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Layout />
+      <AuthProvider>
+        <Layout />
+      </AuthProvider>
     </BrowserRouter>
   );
 }

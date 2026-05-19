@@ -1,12 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
 import { NAV_LINKS } from '../data/navigation';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const navRef = useRef(null);
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    setMobileOpen(false);
+    navigate('/');
+  };
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -88,9 +97,32 @@ export default function Navbar() {
           <NavLink to="/contacto" onClick={() => setMobileOpen(false)}>Contacto</NavLink>
         </li>
         <li>
-          <NavLink to="/login" className="nav-login-btn" onClick={() => setMobileOpen(false)}>
-            Ingresar
-          </NavLink>
+          {isAuthenticated ? (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+              <span style={{
+                color: 'var(--amarillo-e)',
+                fontWeight: 800,
+                fontSize: '.85rem',
+                maxWidth: 120,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}>
+                👤 {user?.fullName?.split(' ')[0]}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="nav-login-btn"
+                style={{ cursor: 'pointer' }}
+              >
+                Salir
+              </button>
+            </div>
+          ) : (
+            <NavLink to="/login" className="nav-login-btn" onClick={() => setMobileOpen(false)}>
+              Ingresar
+            </NavLink>
+          )}
         </li>
       </ul>
     </nav>
