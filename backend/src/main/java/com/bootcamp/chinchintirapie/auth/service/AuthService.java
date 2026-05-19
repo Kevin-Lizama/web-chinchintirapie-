@@ -28,7 +28,7 @@ public class AuthService {
     private final JwtService jwtService;
 
     @Transactional
-    public AuthResponseDto register(RegisterRequestDto request) {
+    public java.util.Map<String, String> register(RegisterRequestDto request) {
         // Validar que el email no esté registrado
         if (userRepository.existsByEmail(request.email())) {
             throw new RuntimeException("El correo ya está registrado");
@@ -45,23 +45,7 @@ public class AuthService {
 
         userRepository.save(user);
 
-        // Generar token JWT
-        User springUser = new User(
-                user.getEmail(),
-                user.getPassword(),
-                List.of(() -> "ROLE_" + user.getRole().name())
-        );
-
-        String token = jwtService.generateToken(springUser);
-
-        return new AuthResponseDto(
-                token,
-                "Bearer",
-                user.getId(),
-                user.getFullName(),
-                user.getEmail(),
-                user.getRole()
-        );
+        return java.util.Map.of("message", "Usuario registrado con éxito");
     }
 
     @Transactional
@@ -97,6 +81,7 @@ public class AuthService {
         String token = jwtService.generateToken(springUser);
 
         return new AuthResponseDto(
+                "Login exitoso",
                 token,
                 "Bearer",
                 user.getId(),
