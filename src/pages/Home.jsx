@@ -41,10 +41,9 @@ const STATS = [
 ];
 
 const TALLERES = [
-  { icon: '🥁', title: 'Percusión Murga',    desc: 'Ritmos colectivos, bombo, redoblante y platillos. La base que mueve el carnaval.' },
-  { icon: '💃', title: 'Danza Andina',        desc: 'Movimiento corporal inspirado en tradiciones andinas y caribeñas fusionadas.' },
-  { icon: '👗', title: 'Diseño de Vestuario', desc: 'Creación de trajes y disfraces carnavaleros con materiales reciclados y artesanales.' },
-  { icon: '🎭', title: 'Teatro Callejero',    desc: 'Performance, zancos, máscara y dramaturgia popular para el espacio público.' },
+  { icon: '💃', title: 'Baile',    desc: 'Expresión corporal y coreografías colectivas inspiradas en el carnaval y la cultura popular.' },
+  { icon: '🥁', title: 'Banda',    desc: 'Formación musical con ritmos carnavaleros, percusión y trabajo en conjunto.' },
+  { icon: '👗', title: 'Figurines', desc: 'Diseño y creación de vestuarios, accesorios y personajes para presentaciones carnavaleras.' },
 ];
 
 const EVENTOS = [

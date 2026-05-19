@@ -41,7 +41,7 @@ export const FOOTER_LINKS = {
     { label: 'info@chinchintirapie.cl', href: 'mailto:info@chinchintirapie.cl' },
     { label: 'Tienda', to: '/tienda' },
     { label: 'Donaciones', to: '/tienda#donaciones' },
-    { label: 'Únete a la murga', to: '/contacto' },
+    { label: 'Únete a la escuela', to: '/contacto' },
   ],
 };
 

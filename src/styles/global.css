@@ -8,13 +8,13 @@
   --turquesa: #16A085;
   --dorado: #D4A017;
   --crema: #FDF6E3;
-  --oscuro: #2C1A0E;
+  --oscuro: #00fbcf;
   --sombra: rgba(44, 26, 14, .45);
   --purpura: #9C4196;
   --cian: #00FBCF;
   --amarillo-e: #FFF142;
   --morado-o: #3E0F42;
-  --beige-c: #F5E9D3;
+  --beige-c: #eac37b;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -87,7 +87,7 @@ body::before {
 
 /* ── Page Hero (subpages) ── */
 .page-hero {
-  background: linear-gradient(135deg, var(--oscuro) 0%, #3d1f0d 60%, rgba(192,57,43,.6) 100%);
+  background: linear-gradient(135deg, var(--oscuro) 0%, #0f8f7f 60%, rgb(0 251 207) 100%);
   padding: 5rem 2rem 4rem;
   text-align: center;
   position: relative;

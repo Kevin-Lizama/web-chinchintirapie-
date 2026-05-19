@@ -21,13 +21,13 @@ const CUERPOS = [
 ];
 
 const ENGRANAJES = [
-  { icon: '💰', title: 'Autogestión',     desc: 'El motor de nuestra independencia. Diseñan las estrategias financieras y logísticas que aseguran la viabilidad del colectivo.' },
-  { icon: '🔍', title: 'Investigación',   desc: 'Los arqueólogos de nuestra cultura. Rescatan, analizan y documentan saberes mediante metodologías propias.' },
-  { icon: '🎓', title: 'Pedagogía',       desc: 'La academia de la calle. A través de sistemas de enseñanza exclusivos, forman a las nuevas generaciones.' },
-  { icon: '🎨', title: 'Diseño',          desc: 'Los arquitectos de nuestra identidad visual. Traducen nuestro sonido y furia en colores, formas y estéticas.' },
-  { icon: '📢', title: 'Comunicaciones',  desc: 'La voz del colectivo. Proyectan nuestra narrativa hacia el mundo, conectando a La Chinchin con festivales.' },
-  { icon: '📋', title: 'Protocolo',       desc: 'El rigor operativo. Garantizan que cada presentación y viaje cumpla los más altos estándares de profesionalismo.' },
-  { icon: '❤️', title: 'Cariñitos',       desc: 'El corazón de La Chinchin. Equipo de bienestar interno dedicado a cuidar nuestra gente y mejorar la convivencia.' },
+  { icon: '💰', title: 'Equipo de Autogestión',     desc: 'El motor de nuestra independencia. Diseñan las estrategias financieras y logísticas que aseguran la viabilidad del colectivo.' },
+  { icon: '🔍', title: 'Equipo de Investigación',   desc: 'Los arqueólogos de nuestra cultura. Rescatan, analizan y documentan saberes mediante metodologías propias.' },
+  { icon: '🎓', title: 'Equipo de Pedagogía',       desc: 'La academia de la calle. A través de sistemas de enseñanza exclusivos, forman a las nuevas generaciones.' },
+  { icon: '🎨', title: 'Equipo de Diseño',          desc: 'Los arquitectos de nuestra identidad visual. Traducen nuestro sonido y furia en colores, formas y estéticas.' },
+  { icon: '📢', title: 'Equipo de Comunicaciones',  desc: 'La voz del colectivo. Proyectan nuestra narrativa hacia el mundo, conectando a La Chinchin con festivales.' },
+  { icon: '📋', title: 'Equipo de Protocolo', desc: 'Encargado de redactar y mantener los estatutos de convivencia, promoviendo el respeto, la organización y el buen funcionamiento dentro de la agrupación.' },
+  { icon: '❤️', title: 'Equipo de Cariñitos',       desc: 'El corazón de La Chinchin. Equipo de bienestar interno dedicado a cuidar nuestra gente y mejorar la convivencia.' },
 ];
 
 export default function Organizacion() {
