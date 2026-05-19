@@ -1,21 +1,56 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Login() {
   const [tab, setTab] = useState('login'); // 'login' | 'register'
   const [form, setForm] = useState({ email: '', password: '', nombre: '', confirm: '' });
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState('');
+  const [serverSuccess, setServerSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
+  const { login, register } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleChange = (field) => (e) => {
+    setForm((f) => ({ ...f, [field]: e.target.value }));
+    // Limpiar error del campo al escribir
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: '' }));
+    if (serverError) setServerError('');
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setServerError('');
+    setServerSuccess('');
+
+    // Validación local
     const errs = {};
     if (!form.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) errs.email = 'Correo no válido';
     if (form.password.length < 6) errs.password = 'Mínimo 6 caracteres';
     if (tab === 'register' && !form.nombre.trim()) errs.nombre = 'Ingresa tu nombre';
     if (tab === 'register' && form.password !== form.confirm) errs.confirm = 'Las contraseñas no coinciden';
     setErrors(errs);
+
+    if (Object.keys(errs).length > 0) return;
+
+    // Enviar al backend
+    setLoading(true);
+    try {
+      if (tab === 'register') {
+        await register(form.nombre.trim(), form.email, form.password);
+        setServerSuccess('¡Cuenta creada exitosamente!');
+      } else {
+        await login(form.email, form.password);
+      }
+      // Redirigir al inicio después de un breve momento
+      setTimeout(() => navigate('/'), 600);
+    } catch (err) {
+      setServerError(err.message || 'Error de conexión con el servidor');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputStyle = (field) => ({
@@ -59,7 +94,7 @@ export default function Login() {
         {/* Tabs */}
         <div style={{ display: 'flex', borderBottom: '2px solid rgba(44,26,14,.1)', marginBottom: '1.5rem' }}>
           {[['login', 'Ingresar'], ['register', 'Registrarse']].map(([key, label]) => (
-            <button key={key} onClick={() => { setTab(key); setErrors({}); }}
+            <button key={key} onClick={() => { setTab(key); setErrors({}); setServerError(''); setServerSuccess(''); }}
               style={{
                 flex: 1, padding: '.6rem', border: 'none', background: 'transparent',
                 fontFamily: 'Nunito, sans-serif', fontWeight: 800, fontSize: '.95rem',
@@ -73,31 +108,67 @@ export default function Login() {
           ))}
         </div>
 
+        {/* Mensajes del servidor */}
+        {serverError && (
+          <div style={{
+            background: '#fdecea',
+            border: '1px solid var(--rojo)',
+            borderRadius: 10,
+            padding: '.7rem 1rem',
+            marginBottom: '1rem',
+            color: 'var(--rojo)',
+            fontSize: '.85rem',
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '.5rem',
+          }}>
+            <span>⚠️</span> {serverError}
+          </div>
+        )}
+        {serverSuccess && (
+          <div style={{
+            background: '#e8f5e9',
+            border: '1px solid var(--verde)',
+            borderRadius: 10,
+            padding: '.7rem 1rem',
+            marginBottom: '1rem',
+            color: '#2e7d32',
+            fontSize: '.85rem',
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '.5rem',
+          }}>
+            <span>✅</span> {serverSuccess}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} noValidate>
           {tab === 'register' && (
             <div style={{ marginBottom: '1rem' }}>
               <label style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--oscuro)' }}>Nombre completo</label>
-              <input type="text" value={form.nombre} onChange={handleChange('nombre')} placeholder="Tu nombre" style={inputStyle('nombre')} />
+              <input type="text" value={form.nombre} onChange={handleChange('nombre')} placeholder="Tu nombre" style={inputStyle('nombre')} disabled={loading} />
               {errors.nombre && <span style={{ color: 'var(--rojo)', fontSize: '.75rem' }}>{errors.nombre}</span>}
             </div>
           )}
 
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--oscuro)' }}>Correo Electrónico</label>
-            <input type="email" value={form.email} onChange={handleChange('email')} placeholder="tu@email.com" style={inputStyle('email')} />
+            <input type="email" value={form.email} onChange={handleChange('email')} placeholder="tu@email.com" style={inputStyle('email')} disabled={loading} />
             {errors.email && <span style={{ color: 'var(--rojo)', fontSize: '.75rem' }}>{errors.email}</span>}
           </div>
 
           <div style={{ marginBottom: '1rem' }}>
             <label style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--oscuro)' }}>Contraseña</label>
-            <input type="password" value={form.password} onChange={handleChange('password')} placeholder="••••••••" style={inputStyle('password')} />
+            <input type="password" value={form.password} onChange={handleChange('password')} placeholder="••••••••" style={inputStyle('password')} disabled={loading} />
             {errors.password && <span style={{ color: 'var(--rojo)', fontSize: '.75rem' }}>{errors.password}</span>}
           </div>
 
           {tab === 'register' && (
             <div style={{ marginBottom: '1rem' }}>
               <label style={{ fontWeight: 700, fontSize: '.88rem', color: 'var(--oscuro)' }}>Confirmar contraseña</label>
-              <input type="password" value={form.confirm} onChange={handleChange('confirm')} placeholder="••••••••" style={inputStyle('confirm')} />
+              <input type="password" value={form.confirm} onChange={handleChange('confirm')} placeholder="••••••••" style={inputStyle('confirm')} disabled={loading} />
               {errors.confirm && <span style={{ color: 'var(--rojo)', fontSize: '.75rem' }}>{errors.confirm}</span>}
             </div>
           )}
@@ -108,14 +179,18 @@ export default function Login() {
             </div>
           )}
 
-          <button type="submit" style={{
+          <button type="submit" disabled={loading} style={{
             width: '100%', padding: '.85rem',
-            background: 'var(--morado-o)', color: 'var(--amarillo-e)',
+            background: loading ? '#8e6b8f' : 'var(--morado-o)', color: 'var(--amarillo-e)',
             border: 'none', borderRadius: 12,
             fontFamily: 'Nunito, sans-serif', fontWeight: 800, fontSize: '1rem',
-            cursor: 'pointer', letterSpacing: 1, transition: 'background .2s',
+            cursor: loading ? 'not-allowed' : 'pointer', letterSpacing: 1, transition: 'background .2s',
+            opacity: loading ? 0.7 : 1,
           }}>
-            {tab === 'login' ? '🎭 Ingresar' : '🥁 Crear cuenta'}
+            {loading
+              ? '⏳ Procesando...'
+              : tab === 'login' ? '🎭 Ingresar' : '🥁 Crear cuenta'
+            }
           </button>
         </form>
 
