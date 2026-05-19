@@ -24,13 +24,6 @@ export function AuthProvider({ children }) {
 
   const register = useCallback(async (fullName, email, password) => {
     const data = await authService.register(fullName, email, password);
-    setUser({
-      id: data.userId,
-      fullName: data.fullName,
-      email: data.email,
-      role: data.role,
-    });
-    setToken(data.token);
     return data;
   }, []);
 

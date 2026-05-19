@@ -29,15 +29,7 @@ const authService = {
       throw new Error(errorMsg);
     }
 
-    // Guardar token y datos del usuario en localStorage
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify({
-      id: data.userId,
-      fullName: data.fullName,
-      email: data.email,
-      role: data.role,
-    }));
-
+    // No loguear automáticamente tras registro
     return data;
   },
 

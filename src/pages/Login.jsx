@@ -39,13 +39,15 @@ export default function Login() {
     setLoading(true);
     try {
       if (tab === 'register') {
-        await register(form.nombre.trim(), form.email, form.password);
-        setServerSuccess('¡Cuenta creada exitosamente!');
+        const data = await register(form.nombre.trim(), form.email, form.password);
+        setServerSuccess(data.message || '¡Cuenta creada exitosamente!');
+        setTab('login');
+        setForm(f => ({ ...f, password: '', confirm: '' }));
       } else {
         await login(form.email, form.password);
+        // Redirigir al inicio después de un breve momento
+        setTimeout(() => navigate('/'), 600);
       }
-      // Redirigir al inicio después de un breve momento
-      setTimeout(() => navigate('/'), 600);
     } catch (err) {
       setServerError(err.message || 'Error de conexión con el servidor');
     } finally {
